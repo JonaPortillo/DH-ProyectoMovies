@@ -18,11 +18,12 @@ module.exports = (sequelize, dataTypes) => {
             allowNull: false,
         },
         length: {
-            type: dataTypes.INTEGER(10).UNDIGNED,
-            allowNull: false,
+            type: dataTypes.INTEGER(10).UNSIGNED,
+
         },
         awards: {
-            type: dataTypes.INTEGER(10).UNDIGNED,
+            type: dataTypes.INTEGER(10).UNSIGNED,
+            allowNull: false,
         },
         release_date: {
             type: dataTypes.DATE,
