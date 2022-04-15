@@ -10,7 +10,7 @@ module.exports = (sequelize, dataTypes) => {
             allowNull: false
         },
         title: {
-            type: dataTypes.DECIMAL(500),
+            type: dataTypes.STRING(500),
             allowNull: false
         },
         rating: {
