@@ -66,10 +66,24 @@ module.exports = {
 
     },
     edit: function (req, res) {
-        // TODO
+        db.Movie.findByPk(req.params.id)
+            .then(movie => {
+                res.render('moviesEdit.ejs', { Movie: movie });
+            });
     },
     update: function (req, res) {
-        // TODO
+        db.Movie.update({
+            title: req.body.title,
+            rating: req.body.rating,
+            awards: req.body.awards,
+            release_date: req.body.release_date,
+            length: req.body.length,
+            genre: req.body.genre
+        }, {
+            where: { id: req.params.id }
+        })
+            .then(() => res.redirect('/movies/detail/' + req.params.id))
+            .catch(e => console.log(e));
     },
     delete: function (req, res) {
         // TODO
