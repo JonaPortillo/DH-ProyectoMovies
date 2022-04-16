@@ -3,7 +3,11 @@ let { validationResult } = require('express-validator')
 
 module.exports = {
     list: (req, res) => {
-        db.Movie.findAll()
+        db.Movie.findAll({
+            include: [{
+                association: 'genre'
+            }]
+        })
             .then(movies => {
                 res.render('moviesList.ejs', { movies })
             })
@@ -52,13 +56,14 @@ module.exports = {
         } else {
             res.send(errors.mapped())
         } */
+        console.log(req.body)
         db.Movie.create({
             title: req.body.title,
             rating: req.body.rating,
             awards: req.body.awards,
             release_date: req.body.release_date,
             length: req.body.length,
-            genre: req.body.genre
+            genre_id: req.body.genre_id
         })
             .then(() => res.redirect('/movies'))
             .catch(e => console.log(e));
@@ -66,10 +71,21 @@ module.exports = {
 
     },
     edit: function (req, res) {
-        db.Movie.findByPk(req.params.id)
+        let movieToEdit;
+        db.Movie.findByPk(req.params.id, {
+            include: [{
+                association: 'genre'
+            }]
+        })
             .then(movie => {
-                res.render('moviesEdit.ejs', { Movie: movie });
-            });
+                movieToEdit = movie;
+            })
+            .catch(e => console.log(e));
+        db.Genre.findAll()
+            .then(genres => {
+                res.render('moviesEdit.ejs', { Movie: movieToEdit, allGenres: genres })
+            })
+            .catch(e => console.log(e));
     },
     update: function (req, res) {
         db.Movie.update({
@@ -78,7 +94,7 @@ module.exports = {
             awards: req.body.awards,
             release_date: req.body.release_date,
             length: req.body.length,
-            genre: req.body.genre
+            genre_id: req.body.genre_id
         }, {
             where: { id: req.params.id }
         })

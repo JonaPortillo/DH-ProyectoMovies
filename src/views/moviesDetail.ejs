@@ -25,18 +25,23 @@
     </p>
     <p>LENGTH: <%= movie.length + ' min' %>
     </p>
-    <p>RELEASE DATE: <%= movie.release_date %>
+    <p>RELEASE DATE: <%= movie.release_date.toLocaleString() %>
     </p>
-    <a href="/movies/edit/<%= movie.id %>">
-        <button>
-            Editar
-        </button>
-    </a>
-    <a href="/movies/delete/<%= movie.id %>">
-        <button>
-            Eliminar
-        </button>
-    </a>
+    <br>
+    <section>
+        <a href="/movies/edit/<%= movie.id %>">
+            <button>
+                Modificar
+            </button>
+        </a>
+        <a href="/movies/delete/<%= movie.id %>">
+            <button>
+                Eliminar
+            </button>
+        </a>
+    </section>
+    <br>
+    <a class="botonVolver" href="/movies">Listado de Películas</a>
 </body>
 
 </html>
