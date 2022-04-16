@@ -28,7 +28,7 @@ app.use(moviesRoutes);
 app.use(genresRoutes);
 
 /* RUTAS API */
-//app.use('api/movies', apiMoviesRoutes);
+app.use('/api/movies', apiMoviesRoutes);
 app.use('/api/genres', apiGenresRoutes)
 
 app.listen('3001', () => console.log('Servidor corriendo en el puerto 3001, http://localhost:3001'));
