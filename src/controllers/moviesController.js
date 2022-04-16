@@ -1,4 +1,5 @@
 const db = require('../database/models/index');
+let { validationResult } = require('express-validator')
 
 module.exports = {
     list: (req, res) => {
@@ -22,7 +23,7 @@ module.exports = {
                 res.render('newestMovies', { movies });
             });
     },
-    'recomended': (req, res) => {
+    recomended: (req, res) => {
         db.Movie.findAll({
             where: {
                 rating: {
@@ -37,5 +38,43 @@ module.exports = {
             .then(movies => {
                 res.render('recommendedMovies.ejs', { movies });
             });
+    },
+    add: (req, res) => {
+        db.Genre.findAll()
+            .then(genres => {
+                res.render('moviesAdd.ejs', { allGenres: genres })
+            })
+    },
+    create: (req, res) => {
+        /* let errors = validationResult(req)
+        if (errors.isEmpty()) {
+            res.send("sin errores");
+        } else {
+            res.send(errors.mapped())
+        } */
+        db.Movie.create({
+            title: req.body.title,
+            rating: req.body.rating,
+            awards: req.body.awards,
+            release_date: req.body.release_date,
+            length: req.body.length,
+            genre: req.body.genre
+        })
+            .then(() => res.redirect('/movies'))
+            .catch(e => console.log(e));
+
+
+    },
+    edit: function (req, res) {
+        // TODO
+    },
+    update: function (req, res) {
+        // TODO
+    },
+    delete: function (req, res) {
+        // TODO
+    },
+    destroy: function (req, res) {
+        // TODO
     }
 }
