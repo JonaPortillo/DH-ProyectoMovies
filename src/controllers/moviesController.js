@@ -86,9 +86,16 @@ module.exports = {
             .catch(e => console.log(e));
     },
     delete: function (req, res) {
-        // TODO
+        db.Movie.findByPk(req.params.id)
+            .then(movie => {
+                res.render('moviesDelete.ejs', { Movie: movie });
+            });
     },
     destroy: function (req, res) {
-        // TODO
+        db.Movie.destroy({
+            where: { id: req.params.id }
+        })
+            .then(() => res.redirect('/movies'))
+            .catch((e) => console.log)
     }
 }
