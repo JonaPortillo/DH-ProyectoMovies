@@ -29,19 +29,10 @@
     </p>
     <br>
     <section>
-        <a href="/movies/edit/<%= movie.id %>">
-            <button>
-                Modificar
-            </button>
-        </a>
-        <a href="/movies/delete/<%= movie.id %>">
-            <button>
-                Eliminar
-            </button>
-        </a>
+        <a class="botonModificar" href="/movies/edit/<%= movie.id %>">Modificar</a>
+        <a class="botonBorrar" href="/movies/delete/<%= movie.id %>">Borrar</a>
+        <a class="botonVolver" href="/movies">Listado de Películas</a>
     </section>
-    <br>
-    <a class="botonVolver" href="/movies">Listado de Películas</a>
 </body>
 
 </html>

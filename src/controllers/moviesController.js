@@ -1,5 +1,9 @@
 const db = require('../database/models/index');
 let { validationResult } = require('express-validator')
+const { Op } = require("sequelize");
+const fetch = require('node-fetch');
+const API = 'http://www.omdbapi.com/?apikey=36c2bceb';
+
 
 module.exports = {
     list: (req, res) => {
@@ -113,5 +117,31 @@ module.exports = {
         })
             .then(() => res.redirect('/movies'))
             .catch((e) => console.log)
+    },
+    buscar: (req, res) => {
+        db.Movie.findAll({
+            where: {
+                title: { [Op.like]: '%' + req.body.titulo + '%' }
+            },
+            include: [{
+                association: 'genre'
+            }]
+        })
+            .then(movies => {
+                if (movies.length > 0) {
+                    res.render('moviesList.ejs', { movies })
+                } else {
+                    fetch(API + '&t=' + req.body.titulo)
+                        .then(response => response.json())
+                        .then(movie => {
+                            if (movie.Response == 'True') {
+                                res.render('moviesDetailOmdb.ejs', { movie })
+                            } else {
+                                res.render('movieNotFound.ejs', { palabra: req.body.titulo })
+                            }
+                        })
+                        .catch(e => console.log(e))
+                }
+            })
     }
 }

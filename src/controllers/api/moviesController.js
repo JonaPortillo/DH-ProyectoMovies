@@ -10,23 +10,43 @@ const Movies = db.Movie;
 const Genres = db.Genre;
 const Actors = db.Actor;
 
+const fetch = require('node-fetch');
+const API = 'http://www.omdbapi.com/?apikey=36c2bceb';
 
 const moviesController = {
-    /* 'list': (req, res) => {
-        db.Movie.findAll({
+    /*'list': (req, res) => {
+        
+        /*db.Movie.findAll({
             include: ['genre']
         })
             .then(movies => {
-                res.render('moviesList.ejs', { movies })
+            let respuesta = {
+                meta: {
+                    status : 200,
+                    total: movies.length,
+                    url: 'api/movies'
+                },
+                data: movies
+            }
+                res.json(respuesta);
             })
     },
+    
     'detail': (req, res) => {
         db.Movie.findByPk(req.params.id,
             {
                 include: ['genre']
             })
             .then(movie => {
-                res.render('moviesDetail.ejs', { movie });
+                let respuesta = {
+                    meta: {
+                        status: 200,
+                        total: movie.length,
+                        url: '/api/movie/:id'
+                    },
+                    data: movie
+                }
+                res.json(respuesta);
             });
     },
     'new': (req, res) => {
@@ -51,8 +71,17 @@ const moviesController = {
             ]
         })
             .then(movies => {
-                res.render('recommendedMovies.ejs', { movies });
-            });
+            let respuesta = {
+                meta: {
+                    status : 200,
+                    total: movies.length,
+                    url: 'api/movies/recomended/:rating'
+                },
+                data: movies
+            }
+                res.json(respuesta);
+        })
+        .catch(error => console.log(error))
     },
     //Aqui dispongo las rutas para trabajar con el CRUD
     add: function (req, res) {
@@ -145,7 +174,17 @@ const moviesController = {
                 }
             })
             .catch(error => res.send(error))
+    },
+    buscar: (req, res) => {
+        fetch(API + '&t=' + req.query.titulo)
+            .then(response => response.json())
+            .then(movie => {
+                console.log(movie)
+                return res.json(movie)
+            })
+            .catch(e => console.log(e))
     }
+
 }
 
 module.exports = moviesController;
