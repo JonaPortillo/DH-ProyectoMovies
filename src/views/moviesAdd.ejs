@@ -15,21 +15,28 @@
     <h1 class="moviesAddTitulo"></h1>
     <br>
     <section id="formulario">
-        <article>
-            <form action="/movies/create" method="POST">
+        <article class="mostrarFormulario">
+            <ul class="errores"></ul>
+            <form class="form" action="/movies/create" method="POST">
                 <label for="title">Titulo </label>
-                <p><input type="text" name="title" id="titulo" required></p>
+                <div><input type="text" name="title" id="title"></div>
+                <div class="is-invalid msgTitle"></div>
                 <label for="rating">Calificación </label>
-                <p><input type="number" name="rating" id="" required> </p>
+                <div><input type="number" name="rating" id="rating" placeholder="Indicar valor entre 0 y 10"> </div>
+                <div class="is-invalid msgRating"></div>
                 <label for="awards">Premios </label>
-                <p><input type="number" name="awards" id="" required></p>
+                <div><input type="number" name="awards" id="awards" placeholder="Indicar valor entre 0 y 10"></div>
+                <div class="is-invalid msgAwards"></div>
                 <label for="release_date">Fecha de creación </label>
-                <p><input type="date" name="release_date" id="" required></p>
+                <div><input type="date" name="release_date" id="release_date"></div>
+                <div class="is-invalid msgDate"></div>
                 <label for="length">Duración </label>
-                <p><input type="number" name="length" id="" required></p>
+                <div><input type="number" name="length" id="length"
+                        placeholder="Indicar duración entre 60 y 360 minutos"></div>
+                <div class="is-invalid msgLength"></div>
                 <label for="genreID">Género </label>
-                <p>
-                    <select name="genre_id" id="" required>
+                <div>
+                    <select name="genre_id" id="genre_id">
                         <option value="" disabled selected>- Seleccione el género - </option>
                         <% allGenres.forEach(genre=> { %>
                             <option value="<%= genre.id %>">
@@ -37,17 +44,18 @@
                             </option>
                             <% }); %>
                     </select>
-                </p>
+                </div>
+                <div class="is-invalid msgGenre"></div>
                 <br>
-                <p> <button class="botonAgregar" type="submit">Agregar</button>
+                <div> <button class="botonAgregar" type="submit">Agregar</button>
 
                     <a class="botonVolver" href="/movies">Listado de Películas</a>
-                </p>
+                </div>
             </form>
         </article>
     </section>
+    <script src="/js/moviesAddValidation.js"></script>
     <script src="/js/moviesAdd.js"></script>
-
 </body>
 
 </html>

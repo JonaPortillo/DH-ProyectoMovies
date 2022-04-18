@@ -23,7 +23,7 @@ window.addEventListener('load', function () {
     })
 
     /* Desafío 2 */
-    $input = document.querySelector('input#titulo');
+    $input = document.querySelector('input#title');
     let estadoSecreto = 0;
 
     $input.addEventListener('keyup', function (e) {
