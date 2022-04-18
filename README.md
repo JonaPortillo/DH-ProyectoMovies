@@ -18,4 +18,10 @@ Realizado para curso de Programación FullStack con Node y React, dictados por F
 
 - Creadon nuestras propias APIs.
 
-- Consumo de APIs desde el Back-End
+- Consumo de APIs desde el Back-End.
+
+### Manipulación del DOM
+
+- Manipulando elementos con JavaScript.
+
+- Agregando interacción con eventos.
