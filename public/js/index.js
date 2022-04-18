@@ -1,5 +1,5 @@
 console.log("Andandoooooo")
-window.addEventListener('load',function(){
+window.addEventListener('load', function () {
 
     /* DESAFIO 1 */
     const $main = document.querySelector('main');
@@ -15,24 +15,36 @@ window.addEventListener('load',function(){
 
     $a.style.color = "#E51B3E";
 
-    if(window.confirm("¿Desea colocar un fondo de pantalla?")){
+    if (window.confirm("¿Desea colocar un fondo de pantalla?")) {
         $body.classList.add('fondo');
     }
 
     for (let i = 0; i < $p.length; i++) {
         if (i % 2 == 0) {
             $p[i].classList.add('destacadoPar');
-        }else{
+        } else {
             $p[i].classList.add('destacadoImpar');
         }
     }
 
     $main.style.display = 'block';
 
-    /* Desafio 2 */
+    /* Agregando interacción con eventos */
+    /* Desasfío 1  */
+    const $menu = document.querySelector('#menu');
+
+    const $logoDH = document.querySelector('.logoDH');
+
+    $logoDH.addEventListener('click', function () {
+        $menu.classList.toggle('mostrar');
+    })
+
+    $menu.addEventListener('mouseout', function () {
+        $menu.classList.toggle('mostrar');
+    })
 
 
 
 
-    
+
 })

@@ -13,4 +13,12 @@ window.addEventListener('load', function () {
     $article.classList.add('fondoTransparente');
 
     $section.classList.add('fondoCRUD');
+
+    /* Agregando interacción con eventos */
+    /* Desasfío 1  */
+    $h1.addEventListener('mouseover', function () {
+        let randomColor = "#" + ((1 << 24) * Math.random() | 0).toString(16);
+        console.log("Color del título:" + randomColor);
+        $h1.style.color = randomColor;
+    })
 })
