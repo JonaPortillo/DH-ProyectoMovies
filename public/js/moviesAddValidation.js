@@ -100,4 +100,73 @@ window.addEventListener('load', function () {
         }
     });
 
+
+    /* Desafío 2 */
+
+    let errores;
+    let $errores = qs('.errores');
+    $errores.classList.add('alert-warning');
+
+    $form.addEventListener('submit', function (e) {
+        /* Reinicio del ul y array de errores */
+        $errores.innerHTML = "";
+        errores = [];
+        e.preventDefault();
+
+        // Titulo
+        if ($title.value.length < 1) {
+            errores.push("El campo Titulo es requerido");
+        } else {
+            if ($title.value.length > 50) {
+                errores.push("El campo nombre debe ser menor a 50 caracteres");
+            }
+        }
+        //Rating
+        if ($rating.value.length < 1) {
+            errores.push("El campo Calificación es requerido");
+        } else {
+            if ($rating.value > 10 || $rating.value < 0) {
+                errores.push("El campo Calificación debe ser un número entre 0 y 10")
+            }
+        }
+        //Awards
+        if ($awards.value.length < 1) {
+            errores.push("El campo Premios es requerido");
+        } else {
+            if ($awards.value > 10 || $awards.value < 0) {
+                errores.push("El campo Premios debe ser un número entre 0 y 10")
+            }
+        }
+
+        //Release_date
+        if ($release_date.value == '') {
+            errores.push("El campo Fecha de Creación es requerido");
+        }
+
+        //Length
+        if ($length.value.length < 1) {
+            errores.push("El campo Duración es requerido");
+        } else {
+            if ($length.value > 360 || $length.value < 30) {
+                errores.push("El campo Duración debe ser un número entre 30 y 360")
+            }
+        }
+
+        //Genre_id
+        if ($genre_id.value == '') {
+            errores.push("El campo Género es requerido");
+        }
+
+
+        if (errores.length > 0) {
+
+            for (let i = 0; i < errores.length; i++) {
+                $errores.innerHTML += '<li class="is-invalid">' + errores[i] + '</li>';
+            }
+
+        } else {
+            window.alert("La película se guardó satisfactoriamente")
+            $form.submit();
+        }
+    })
 })
