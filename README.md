@@ -14,13 +14,13 @@ Realizado para curso de Programación FullStack con Node y React, dictados por F
 
 - Relaciones y CRUD.
 
-### API Movies
+### API Movies:
 
 - Creadon nuestras propias APIs.
 
 - Consumo de APIs desde el Back-End.
 
-### Manipulación del DOM
+### Manipulación del DOM:
 
 - Manipulando elementos con JavaScript.
 
